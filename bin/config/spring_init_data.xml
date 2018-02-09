@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+   http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+   http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
+   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+   http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.1.xsd
+   http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+
+    <bean id="base_all_string_initor" abstract="true" class="lab.clariones.data_initialization.AllStringInitOperator">
+        <property name="cleanAllExistedDataInTable" value="true"/>
+    </bean>
+	<bean id="province_initor" parent="base_all_string_initor">
+		<property name="sql"
+			value="insert into province_data (id, name, platform, version) values(?,?,'CIP000001', 1)" />
+		<property name="dataList">
+			<list>
+				<value>P000001,四川</value>
+			</list>
+		</property>
+	</bean>
+
+    <bean id="city_initor" parent="base_all_string_initor">
+        <property name="sql"
+            value="insert into city_data (id, name, province, version) values(?,?,?, 1)" />
+        <property name="dataList">
+            <list>
+                <value>C000001,成都,P000001</value>
+                <value>C000002,绵阳,P000001</value>
+                <value>C000003,南充,P000001</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="available_product_initor" parent="base_all_string_initor">
+        <property name="sql"
+            value="insert into available_product_data (id, product_name, service_key, service_description, platform, version) values(?,?,?,?, 'CIP000001', 1)" />
+        <property name="dataList">
+            <list>
+                <value>AP000001,上线年检,VEHICLE,车辆年检</value>
+                <value>AP000002,不上线年检,FILE,六年免捡车辆年检</value>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="available_insurance_initor" parent="base_all_string_initor" class="lab.clariones.data_initialization.SimpleDataTypeInferInitOperator">
+        <property name="sql"
+            value="insert into available_insurance_data (id, insurance_name, insurance_vendor, insurance_price, summary, product, version) values(?,?,?,?,?, 'AP000001', 1)" />
+        <property name="dataList">
+            <list>
+                <value>AI000001,基本保险,平台提供, 0.0, 除了基本保险，还可以购买额外保险</value>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="available_service_initor" parent="base_all_string_initor" >
+        <property name="sql"
+            value="insert into available_service_data (id,service_name,service_key,service_description,available_product,version) values(?,?,?,?,?, 1)" />
+        <property name="dataList">
+            <list>
+                <!-- 普通车辆年检的sevice code -->
+                <value>AV000001,门店收车,VEHICLE_C2M_RECEIVE_IN_STORE,客户送车到门店,AP000001</value>
+                <value>AV000002,门店取车,VEHICLE_C2M_PICK_IN_HOME,商家到客户家上门取车,AP000001</value>
+                <value>AV000003,取车直审,VEHICLE_C2M_PICK_TO_STATION,驻站代审员上门取车\,直接送审,AP000001</value>
+                <value>AV000004,门店接车,VEHICLE_M2M_PICK_IN_STORE,接车代审员从门店取车\,完成交接检查\,准备送往驻站代审员,AP000001</value>
+                <value>AV000005,送检测站,VEHICLE_M2M_TO_STATION,接车代审员将车送达驻站代审员,AP000001</value>
+                <value>AV000006,车辆送修,VEHICLE_M2M_TO_REPAIRING,驻站代审员将车送往修理厂,AP000001</value>
+                <value>AV000007,车辆取修,VEHICLE_M2M_FROM_REPAIRING,驻站代审员将车从修理厂取回检测站,AP000001</value>
+                <value>AV000008,站点取车,VEHICLE_M2M_FROM_STATION,接车代审员从检测站取车\,完成交接检查\,准备送往门店,AP000001</value>
+                <value>AV000009,还车到店,VEHICLE_M2M_TO_STORE,接车代审员将车从检测站送达门店,AP000001</value>
+                <value>AV000010,车辆年检,VEHICLE_INSPECTION,车辆的年检审核服务,AP000001</value>
+                <value>AV000011,检查维修,VEHICLE_REPAIRING,车辆的必要检查和维修,AP000001</value>
+                <value>AV000012,保险服务,INSURANCE,车辆年审的保险服务,AP000001</value>
+                
+                <value>AV000013,门店还车,VEHICLE_M2C_IN_STORE,车辆在门店\,客户来取,AP000001</value>
+                <value>AV000014,还车到家,VEHICLE_M2C_TO_HOME,接车员将车辆送还客户,AP000001</value>
+                <value>AV000015,审毕还车,VEHICLE_M2C_DIRECT_FROM_STATION,审核结束后\,驻站代审员直接将车辆送还客户,AP000001</value>
+                
+                <!-- 六年免检的serveice code -->
+                <value>AV000016,门店收件,FILE_C2M_RECEIVE_IN_STORE,客户将车辆证件送到门店,AP000002</value>
+                <value>AV000017,门店取件,FILE_C2M_PICK_IN_HOME,商家到客户家上门收取车辆证件,AP000002</value>
+                <value>AV000018,取件直审,FILE_C2M_PICK_TO_STATION,驻站代审员上门收取车辆证件\,直接送审,AP000002</value>
+                <value>AV000019,门店接件,FILE_M2M_PICK_IN_STORE,接件代审员从门店收取车辆证件\,完成交接检查\,准备送往驻站代审员,AP000002</value>
+                <value>AV000020,送检测站,FILE_M2M_TO_STATION,接件代审员将车辆证件送达驻站代审员\,AP000002</value>
+                <value>AV000021,站点取件,FILE_M2M_FROM_STATION,接件代审员从检测站收取车辆证件\,完成交接检查\,准备送往门店,AP000002</value>
+                <value>AV000022,六年免检,FILE_INSPECTION,6年免检车辆的证件审核服务,AP000002</value>
+                <value>AV000023,还件到店,FILE_M2M_TO_STORE,接件代审员将车辆证件从检测站送达门店,AP000002</value>
+                <value>AV000024,门店还件,FILE_M2C_IN_STORE,车辆证件在门店\,客户来取,AP000002</value>
+                <value>AV000025,还件到家,FILE_M2C_TO_HOME,接件员将车辆证件送还客户,AP000002</value>
+                <value>AV000026,审毕还件,FILE_M2C_DIRECT_FROM_STATION,审件结束后\,驻站代审员直接将车辆证件送还客户,AP000002</value>
+            </list>
+        </property>
+    </bean>
+  
+    <bean id="available_vehicle_type_initor" parent="base_all_string_initor" class="lab.clariones.data_initialization.SimpleDataTypeInferInitOperator">
+        <property name="sql"
+            value="insert into available_vehicle_type_data (id, vehicle_type, vehicle_type_alias, platform, version) values(?,?,?, 'CIP000001', 1)" />
+        <property name="dataList">
+            <list>
+                <value>AVT000001,小型轿车,小型轿车\,小型汽车\,家用轿车\,家用汽车</value>
+                <value>AVT000002,卡车,卡车</value>
+                <value>AVT000003,客车,客车\,小型越野客车</value>
+                <value>AVT000004,其他,其它\,其他</value>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="available_rating_initor" parent="base_all_string_initor" class="lab.clariones.data_initialization.SimpleDataTypeInferInitOperator">
+        <property name="sql"
+            value="insert into available_rating_item_data (id, rating_name, platform, version) values(?,?, 'CIP000001', 1)" />
+        <property name="dataList">
+            <list>
+                <value>ARI000001,总体服务满意度</value>
+                <value>ARI000002,检测服务满意度</value>
+                <value>ARI000003,修车服务满意度</value>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="available_review_initor" parent="base_all_string_initor" class="lab.clariones.data_initialization.SimpleDataTypeInferInitOperator">
+        <property name="sql"
+            value="insert into available_review_item_data (id, review_name, platform, version) values(?,?, 'CIP000001', 1)" />
+        <property name="dataList">
+            <list>
+                <value>ARI000001,很有礼貌</value>
+                <value>ARI000002,服务准时</value>
+                <value>ARI000003,非常专业</value>
+            </list>
+        </property>
+    </bean>
+    
+    <!--
+    ====================================================================================================================
+    -->
+    <!-- 测试用数据 -->
+    <bean id="test_merchant_initor" parent="base_all_string_initor">
+        <property name="sql"
+            value="insert into vehicle_service_company_data (id,company_name,operating_status,address_city,address_detail,
+            available_store_service,available_home_service,opening_time,longitude,latitude,contact_phone,
+            company_image_1,company_image_2,company_image_3,company_image_4,company_image_5,platform,version) 
+            values(?,?,?,?,?,1,1,?,?,?,?,?,NULL,NULL,NULL,NULL,'CIP000001',1)" />
+        <property name="dataList">
+            <list>
+                <value>VSC000001, 洗车人家, 正常, C000001,成都市双流区关东一街与吉龙二街交叉口东北150米,9:00~21:00\,节假日不休, 104.092586, 30.536711,028-65471222, public/example/product/shores/girls/pid456/skuid456/230/182/111/229/p456s456main.picture.jpeg</value>
+                <value>VSC000002, 好易修汽车快修服务(天府店), 正常, C000001,成都市双流区伏龙小区益州大道南段156号 ,9:00~21:00\,节假日不休, 104.056857, 30.532075,028-65471222, public/example/product/shores/girls/pid123/skuid123/236/191/170/17/p123s123main.picture.jpeg</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="test_company_file_platenumber_initor" parent="base_all_string_initor" class="lab.clariones.data_initialization.SimpleDataTypeInferInitOperator">
+        <property name="sql"
+            value="insert into file_inspection_plate_number_pattern_data (id, plate_number_pattern,  company, version) values(?,?,?,1)" />
+        <property name="dataList">
+            <list>
+                <value>FIPNP000001, 川A, VSC000001</value>
+                <value>FIPNP000002, 川A, VSC000002</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="test_company_vehicle_platenumber_initor" parent="base_all_string_initor" class="lab.clariones.data_initialization.SimpleDataTypeInferInitOperator">
+        <property name="sql"
+            value="insert into vehicle_inspection_plate_number_pattern_data (id, plate_number_pattern,  company, version) values(?,?,?,1)" />
+        <property name="dataList">
+            <list>
+                <value>VIPNP000001, 川A, VSC000001</value>
+                <value>VIPNP000002, 川A, VSC000002</value>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="test_product_price_initor" parent="base_all_string_initor" class="lab.clariones.data_initialization.SimpleDataTypeInferInitOperator">
+        <property name="sql"
+            value="insert into product_price_data (id, product,city, vehicle_type,inspection_price,agent_service_price, description, version) values(?,?,?,?,?,?,?,1)" />
+        <property name="dataList">
+            <list>
+                <value>PP000001,AP000001,C000001,小型轿车,216.0,168.0,含车辆检测费$200.00元和车辆检测待办服务费$168.00元</value>
+                <value>PP000002,AP000001,C000001,客车,316.0,168.0,含车辆检测费$200.00元和车辆检测待办服务费$168.00元</value>
+                <value>PP000003,AP000002,C000001,小型轿车,116.0,83.0,含车辆检测费$100.00元和车辆检测待办服务费$99.00元</value>
+                <value>PP000004,AP000002,C000001,客车,516.0,168.0,含车辆检测费$200.00元和车辆检测待办服务费$168.00元</value>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="test_prorder_promotion_initor" parent="base_all_string_initor" class="lab.clariones.data_initialization.SimpleDataTypeInferInitOperator">
+        <property name="sql"
+            value="insert into preorder_promotion_data (id, promotion_message, preorder_days, discount_amount, start_date, end_date, platform, version) values(?,?,?,?,?,?,'CIP000001',1)" />
+        <property name="dataList">
+            <list>
+                <value>PP000001,提前5天\,立减10元,5,5.0,2018-1-1 00:00:00, 2999-12-31 23:59:59</value>
+                <value>PP000002,提前10天\,立减10元,10,10.0,2018-1-1 00:00:00, 2999-12-31 23:59:59</value>
+                <value>PP000003,提前30天\,立减30元,30,30.0,2018-1-1 00:00:00, 2999-12-31 23:59:59</value>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="test_customer_coupon_initor" parent="base_all_string_initor" class="lab.clariones.data_initialization.SimpleDataTypeInferInitOperator">
+        <property name="sql"
+            value="insert into order_discount_coupon_data (id, coupon_title,  discount_amount,  end_date, last_update_time,  coupon_status,  customer, main_order, platform, version) values(?,?,?,?,now(),?,?,NULL,'CIP000001',1)" />
+        <property name="dataList">
+            <list>
+                <value>ODC000001,优惠￥5元,5.0,2019-12-31 23:59:59,未使用,C000401</value>
+                <value>ODC000002,优惠￥10元,10.0,2018-12-31 23:59:59,未使用,C000401</value>
+            </list>
+        </property>
+    </bean>
+    
+    
+</beans>
+
+

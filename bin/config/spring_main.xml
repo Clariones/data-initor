@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	
+	<!-- 
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreUnresolvablePlaceholders" value="false"/>
+        <property name="locations">
+            <list>
+                 <value>file:${env_conf_path}/env.properties</value>
+            </list>
+        </property>
+    </bean>
+     -->
+     
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" >
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url"	value="jdbc:mysql://localhost:3306/cis?characterEncoding=utf8&amp;autoReconnect=true&amp;useSSL=false" />
+		<property name="username" value="root" />
+		<property name="password" value="0254891276" />
+		<property name="initialSize" value="20" />
+		<property name="maxActive" value="30" />
+		
+		
+		<property name="testOnBorrow" value="true" />
+		<property name="testWhileIdle" value="true" />
+		<property name="validationQuery" value="SELECT 1" />       
+		<property name="removeAbandonedTimeout" value="55" />
+		<property name="removeAbandoned" value="true"/>
+	</bean>
+	
+	<import resource="spring_init_data.xml" />
+	
+	<bean id="data_operator" class="lab.clariones.data_initialization.DataOperator">
+        <property name="dataSource" ref="dataSource"/>
+		<property name="initors">
+            <list>
+				<ref bean="province_initor"/>
+                <ref bean="city_initor"/>
+                <ref bean="available_product_initor"/>
+                <ref bean="available_insurance_initor"/>
+                <ref bean="available_service_initor"/>
+                <ref bean="available_vehicle_type_initor"/>
+                <ref bean="available_rating_initor"/>
+                <ref bean="available_review_initor"/>
+                
+                <!-- 测试用数据 -->
+                <ref bean="test_merchant_initor"/>
+                <ref bean="test_company_file_platenumber_initor"/>
+                <ref bean="test_company_vehicle_platenumber_initor"/>
+                <ref bean="test_product_price_initor"/>
+                <ref bean="test_prorder_promotion_initor"/>
+                <ref bean="test_customer_coupon_initor"/>
+            </list>
+        </property>
+	</bean>
+	
+</beans>
+
+

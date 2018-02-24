@@ -41,6 +41,7 @@
                 <ref bean="city_initor"/>
                 <ref bean="available_product_initor"/>
                 <ref bean="available_insurance_initor"/>
+                <ref bean="available_checklist_initor"/>
                 <ref bean="available_service_initor"/>
                 <ref bean="available_vehicle_type_initor"/>
                 <ref bean="available_rating_initor"/>
@@ -48,6 +49,8 @@
                 
                 <!-- 测试用数据 -->
                 <ref bean="test_merchant_initor"/>
+                <ref bean="test_merchant_scope_initor" />
+                <ref bean="test_merchant_employee_initor"/>
                 <ref bean="test_company_file_platenumber_initor"/>
                 <ref bean="test_company_vehicle_platenumber_initor"/>
                 <ref bean="test_product_price_initor"/>

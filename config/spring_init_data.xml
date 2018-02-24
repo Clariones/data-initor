@@ -58,6 +58,19 @@
         </property>
     </bean>
     
+    <bean id="available_checklist_initor" parent="base_all_string_initor">
+        <property name="sql"
+            value="insert into available_hand_over_item_data (id, check_item_name, check_item_description, product, version) values(?,?,?,?, 1)" />
+        <property name="dataList">
+            <list>
+                <value>AHOI000001,车辆已提供,待检测车辆是否已经提供,AP000001</value>
+                <value>AHOI000002,行驶证已提供,待检测车辆的行驶证是否已经提供,AP000001</value>
+                <value>AHOI000003,车辆状态,待检测车辆目前是可以正常行驶,AP000001</value>
+                <value>AHOI000004,行驶证已提供,待检测车辆的行驶证是否已经提供,AP000002</value>
+            </list>
+        </property>
+    </bean>
+    
     <bean id="available_service_initor" parent="base_all_string_initor" >
         <property name="sql"
             value="insert into available_service_data (id,service_name,service_key,service_description,available_product,version) values(?,?,?,?,?, 1)" />
@@ -142,12 +155,97 @@
         <property name="sql"
             value="insert into vehicle_service_company_data (id,company_name,operating_status,address_city,address_detail,
             available_store_service,available_home_service,opening_time,longitude,latitude,contact_phone,
-            company_image_1,company_image_2,company_image_3,company_image_4,company_image_5,platform,version) 
-            values(?,?,?,?,?,1,1,?,?,?,?,?,NULL,NULL,NULL,NULL,'CIP000001',1)" />
+            company_image_1,company_image_2,company_image_3,company_image_4,company_image_5,platform,order_contact,order_contact_phone,version) 
+            values(?,?,?,?,?,1,1,?,?,?,?,?,NULL,NULL,NULL,NULL,'CIP000001',?,?,1)" />
         <property name="dataList">
             <list>
-                <value>VSC000001, 洗车人家, 正常, C000001,成都市双流区关东一街与吉龙二街交叉口东北150米,9:00~21:00\,节假日不休, 104.092586, 30.536711,028-65471222, public/example/product/shores/girls/pid456/skuid456/230/182/111/229/p456s456main.picture.jpeg</value>
-                <value>VSC000002, 好易修汽车快修服务(天府店), 正常, C000001,成都市双流区伏龙小区益州大道南段156号 ,9:00~21:00\,节假日不休, 104.056857, 30.532075,028-65471222, public/example/product/shores/girls/pid123/skuid123/236/191/170/17/p123s123main.picture.jpeg</value>
+                <value>VSC000001, 洗车人家, 正常, C000001,成都市双流区关东一街与吉龙二街交叉口东北150米,9:00~21:00\,节假日不休, 104.092586, 30.536711,028-65471222, public/example/product/shores/girls/pid456/skuid456/230/182/111/229/p456s456main.picture.jpeg,张某某,13800000001</value>
+                <value>VSC000002, 好易修汽车快修服务(天府店), 正常, C000001,成都市双流区伏龙小区益州大道南段156号 ,9:00~21:00\,节假日不休, 104.056857, 30.532075,028-65471222, public/example/product/shores/girls/pid123/skuid123/236/191/170/17/p123s123main.picture.jpeg,赵某某,13800000003</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="test_merchant_scope_initor" parent="base_all_string_initor">
+        <property name="sql"
+            value="insert into vehicle_service_company_business_scope_data (id,company,available_service,version) 
+            values(?,?,?,1)" />
+        <property name="dataList">
+            <list>
+                <value>VSCBS000001, VSC000001, AV000001</value>
+                <value>VSCBS000002, VSC000001, AV000002</value>
+                <value>VSCBS000003, VSC000001, AV000003</value>
+                <value>VSCBS000004, VSC000001, AV000004</value>
+                <value>VSCBS000005, VSC000001, AV000005</value>
+                <value>VSCBS000006, VSC000001, AV000006</value>
+                <value>VSCBS000007, VSC000001, AV000007</value>
+                <value>VSCBS000008, VSC000001, AV000008</value>
+                <value>VSCBS000009, VSC000001, AV000009</value>
+                <value>VSCBS000010, VSC000001, AV000010</value>
+                <value>VSCBS000011, VSC000001, AV000011</value>
+                <value>VSCBS000012, VSC000001, AV000012</value>
+                <value>VSCBS000013, VSC000001, AV000013</value>
+                <value>VSCBS000014, VSC000001, AV000014</value>
+                <value>VSCBS000015, VSC000001, AV000015</value>
+                <value>VSCBS000016, VSC000001, AV000016</value>
+                <value>VSCBS000017, VSC000001, AV000017</value>
+                <value>VSCBS000018, VSC000001, AV000018</value>
+                <value>VSCBS000019, VSC000001, AV000019</value>
+                <value>VSCBS000020, VSC000001, AV000020</value>
+                <value>VSCBS000021, VSC000001, AV000021</value>
+                <value>VSCBS000022, VSC000001, AV000022</value>
+                <value>VSCBS000023, VSC000001, AV000023</value>
+                <value>VSCBS000024, VSC000001, AV000024</value>
+                <value>VSCBS000025, VSC000001, AV000025</value>
+                <value>VSCBS000026, VSC000001, AV000026</value>
+                
+                <value>VSCBS000027, VSC000002, AV000001</value>
+                <value>VSCBS000028, VSC000002, AV000002</value>
+                <value>VSCBS000029, VSC000002, AV000003</value>
+                <value>VSCBS000030, VSC000002, AV000004</value>
+                <value>VSCBS000031, VSC000002, AV000005</value>
+                <value>VSCBS000032, VSC000002, AV000006</value>
+                <value>VSCBS000033, VSC000002, AV000007</value>
+                <value>VSCBS000034, VSC000002, AV000008</value>
+                <value>VSCBS000035, VSC000002, AV000009</value>
+                <value>VSCBS000036, VSC000002, AV000010</value>
+                <value>VSCBS000037, VSC000002, AV000011</value>
+                <value>VSCBS000038, VSC000002, AV000012</value>
+                <value>VSCBS000039, VSC000002, AV000013</value>
+                <value>VSCBS000040, VSC000002, AV000014</value>
+                <value>VSCBS000041, VSC000002, AV000015</value>
+                <value>VSCBS000042, VSC000002, AV000016</value>
+                <value>VSCBS000043, VSC000002, AV000017</value>
+                <value>VSCBS000044, VSC000002, AV000018</value>
+                <value>VSCBS000045, VSC000002, AV000019</value>
+                <value>VSCBS000046, VSC000002, AV000020</value>
+                <value>VSCBS000047, VSC000002, AV000021</value>
+                <value>VSCBS000048, VSC000002, AV000022</value>
+                <value>VSCBS000049, VSC000002, AV000023</value>
+                <value>VSCBS000050, VSC000002, AV000024</value>
+                <value>VSCBS000051, VSC000002, AV000025</value>
+                <value>VSCBS000052, VSC000002, AV000026</value>
+            </list>
+        </property>
+    </bean>
+     <bean id="test_merchant_employee_initor" parent="base_all_string_initor">
+        <property name="sql"
+            value="insert into vehicle_service_company_employee_data (id,employee_name,profile_image,
+            gender,
+            available_state,
+            innocent_evidence_image,
+            identity_card_number,
+            company,
+            available_move_car,
+            available_inspection_car,
+            available_repair_car,
+            mobile_number,
+            version) 
+            values(?,?,?,?,?,?,?,?,true,true,true,?,1)" />
+        <property name="dataList">
+            <list>
+                <value>VSCE000001, 张师傅, zhaopian.jpg, 女, 正常, 证明.jpg, 142722198501234456, VSC000001, 13800000001</value>
+                <value>VSCE000002, 王师傅, zhaopian.jpg, 男, 正常, 证明.jpg, 142722198309154456, VSC000001, 13800000002</value>
+                <value>VSCE000003, 赵师傅, zhaopian.jpg, 女, 正常, 证明.jpg, 142722199312084456, VSC000002, 13800000003</value>
+                <value>VSCE000004, 李师傅, zhaopian.jpg, 男, 正常, 证明.jpg, 142722198608184456, VSC000002, 13800000004</value>
             </list>
         </property>
     </bean>
@@ -178,9 +276,13 @@
         <property name="dataList">
             <list>
                 <value>PP000001,AP000001,C000001,小型轿车,216.0,168.0,含车辆检测费$200.00元和车辆检测待办服务费$168.00元</value>
-                <value>PP000002,AP000001,C000001,客车,316.0,168.0,含车辆检测费$200.00元和车辆检测待办服务费$168.00元</value>
-                <value>PP000003,AP000002,C000001,小型轿车,116.0,83.0,含车辆检测费$100.00元和车辆检测待办服务费$99.00元</value>
-                <value>PP000004,AP000002,C000001,客车,516.0,168.0,含车辆检测费$200.00元和车辆检测待办服务费$168.00元</value>
+                <value>PP000002,AP000001,C000001,客车,316.0,168.0,含车辆检测费$316.00元和车辆检测待办服务费$168.00元</value>
+                <value>PP000003,AP000002,C000001,小型轿车,116.0,83.0,含车辆检测费$1116.00元和车辆检测待办服务费$83.00元</value>
+                <value>PP000004,AP000002,C000001,客车,516.0,168.0,含车辆检测费$516.00元和车辆检测待办服务费$168.00元</value>
+                <value>PP000005,AP000001,C000001,其他,800.0,100.0,含车辆检测费$100.00元和车辆检测待办服务费$100.00元</value>
+                <value>PP000006,AP000001,C000001,其他,800.0,100.0,含车辆检测费$200.00元和车辆检测待办服务费$100.00元</value>
+                <value>PP000007,AP000002,C000001,其他,800.0,100.0,含车辆检测费$100.00元和车辆检测待办服务费$100.00元</value>
+                <value>PP000008,AP000002,C000001,其他,800.0,100.0,含车辆检测费$200.00元和车辆检测待办服务费$100.00元</value>
             </list>
         </property>
     </bean>
@@ -202,8 +304,8 @@
             value="insert into order_discount_coupon_data (id, coupon_title,  discount_amount,  end_date, last_update_time,  coupon_status,  customer, main_order, platform, version) values(?,?,?,?,now(),?,?,NULL,'CIP000001',1)" />
         <property name="dataList">
             <list>
-                <value>ODC000001,优惠￥5元,5.0,2019-12-31 23:59:59,未使用,C000401</value>
-                <value>ODC000002,优惠￥10元,10.0,2018-12-31 23:59:59,未使用,C000401</value>
+                <value>ODC000001,优惠￥5元,5.0,2019-12-31 23:59:59,未使用,C000101</value>
+                <value>ODC000002,优惠￥10元,10.0,2018-12-31 23:59:59,未使用,C000101</value>
             </list>
         </property>
     </bean>

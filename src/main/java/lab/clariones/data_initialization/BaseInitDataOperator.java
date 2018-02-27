@@ -12,7 +12,7 @@ public abstract class BaseInitDataOperator {
     protected String sql;
     protected List<String> dataList;
     protected boolean cleanAllExistedDataInTable = false;
-    Pattern ptnSpliter = Pattern.compile("(?<!(\\\\)),");
+    Pattern ptnSpliter = Pattern.compile("\\s*(?<!(\\\\)),\\s*");
 
     
     public boolean isCleanAllExistedDataInTable() {
@@ -91,7 +91,7 @@ public abstract class BaseInitDataOperator {
     protected String[] splitDataStr(String dataStr) {
 	String[] result =  ptnSpliter.split(dataStr);
 	for(int i =0;i<result.length;i++){
-	    result[i] = result[i].replace("\\,", ",");
+	    result[i] = result[i].replace("\\,", ",").trim();
 	}
 	return result;
     }

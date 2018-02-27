@@ -54,6 +54,7 @@
         <property name="dataList">
             <list>
                 <value>AI000001,基本保险,平台提供, 0.0, 除了基本保险，还可以购买额外保险</value>
+                <value>AI000002,五元保10W,太平洋财产保险公司, 5.0, 检测期间\,意外损伤最高赔10万</value>
             </list>
         </property>
     </bean>
@@ -164,6 +165,28 @@
             </list>
         </property>
     </bean>
+    <bean id="test_merchant_initor_no_movement" parent="base_all_string_initor" class="lab.clariones.data_initialization.SimpleDataTypeInferInitOperator">
+        <property name="cleanAllExistedDataInTable" value="false"/>
+        <property name="sql"
+            value="insert into vehicle_service_company_data (id,company_name,operating_status,address_city,address_detail,
+            available_store_service,available_home_service,opening_time,longitude,latitude,contact_phone,
+            company_image_1,company_image_2,company_image_3,company_image_4,company_image_5,platform,order_contact,order_contact_phone,version) 
+            values(?,?,?,?,?,?,?,?,?,?,?,?,NULL,NULL,NULL,NULL,'CIP000001',?,?,1)" />
+        <property name="dataList">
+            <list>
+                <value><![CDATA[VSC000003, 中和汽修场, 正常, C000001,成都市高新区中和镇中和大道138号,
+                0,1, 9:00~21:00\,节假日不休, 
+                104.092686, 30.546711,028-65471222, 
+                public/example/product/shores/girls/pid123/skuid123/236/191/170/17/p123s123main.picture.jpeg,
+                陈某某,13800000005]]></value>
+                <value><![CDATA[VSC000004, 大源车辆代审服务公司, 正常, C000001,成都市高新区大源社区3-4-2312,
+                0,0, 9:00~21:00\,节假日不休, 
+                104.092686, 30.546711,028-65471222, 
+                public/example/product/shores/girls/pid123/skuid123/236/191/170/17/p123s123main.picture.jpeg,
+                楚某某,13800000006]]></value>
+            </list>
+        </property>
+    </bean>
     <bean id="test_merchant_scope_initor" parent="base_all_string_initor">
         <property name="sql"
             value="insert into vehicle_service_company_business_scope_data (id,company,available_service,version) 
@@ -172,7 +195,7 @@
             <list>
                 <value>VSCBS000001, VSC000001, AV000001</value>
                 <value>VSCBS000002, VSC000001, AV000002</value>
-                <value>VSCBS000003, VSC000001, AV000003</value>
+                <!-- <value>VSCBS000003, VSC000001, AV000003</value> -->
                 <value>VSCBS000004, VSC000001, AV000004</value>
                 <value>VSCBS000005, VSC000001, AV000005</value>
                 <value>VSCBS000006, VSC000001, AV000006</value>
@@ -180,7 +203,7 @@
                 <value>VSCBS000008, VSC000001, AV000008</value>
                 <value>VSCBS000009, VSC000001, AV000009</value>
                 <value>VSCBS000010, VSC000001, AV000010</value>
-                <value>VSCBS000011, VSC000001, AV000011</value>
+                <!-- <value>VSCBS000011, VSC000001, AV000011</value>  -->
                 <value>VSCBS000012, VSC000001, AV000012</value>
                 <value>VSCBS000013, VSC000001, AV000013</value>
                 <value>VSCBS000014, VSC000001, AV000014</value>
@@ -223,6 +246,12 @@
                 <value>VSCBS000050, VSC000002, AV000024</value>
                 <value>VSCBS000051, VSC000002, AV000025</value>
                 <value>VSCBS000052, VSC000002, AV000026</value>
+                
+                <value>VSCBS000053, VSC000003, AV000003</value>
+                <value>VSCBS000054, VSC000003, AV000011</value> 
+                
+                <value>VSCBS000055, VSC000004, AV000010</value>
+                <value>VSCBS000056, VSC000004, AV000022</value>
             </list>
         </property>
     </bean>
@@ -246,6 +275,28 @@
                 <value>VSCE000002, 王师傅, zhaopian.jpg, 男, 正常, 证明.jpg, 142722198309154456, VSC000001, 13800000002</value>
                 <value>VSCE000003, 赵师傅, zhaopian.jpg, 女, 正常, 证明.jpg, 142722199312084456, VSC000002, 13800000003</value>
                 <value>VSCE000004, 李师傅, zhaopian.jpg, 男, 正常, 证明.jpg, 142722198608184456, VSC000002, 13800000004</value>
+                <value>VSCE000005, 陈师傅, zhaopian.jpg, 男, 正常, 证明.jpg, 142722198608284456, VSC000003, 13800000005</value>
+                <value>VSCE000006, 楚师傅, zhaopian.jpg, 女, 正常, 证明.jpg, 142722198622284456, VSC000004, 13800000006</value>
+            </list>
+        </property>
+    </bean>
+    <!-- user_app_data -->
+    <bean id="test_user_app_initor" parent="base_all_string_initor">
+        <property name="cleanAllExistedDataInTable" value="false"/>
+        <property name="sql"
+            value="insert into user_app_data (id,title,sec_user,app_icon,
+            full_access,permission,object_type,object_id,
+            location,version) 
+            values(?,?,?,?,
+            1,?,?,?,'/link/to/app',1)" />
+        <property name="dataList">
+            <list>
+                <value>UA020001, 商户员工, SU000001, user, MXWR, VehicleServiceCompanyEmployee, VSCE000001</value>
+                <value>UA020002, 商户员工, SU000002, user, MXWR, VehicleServiceCompanyEmployee, VSCE000002</value>
+                <value>UA020003, 商户员工, SU000003, user, MXWR, VehicleServiceCompanyEmployee, VSCE000003</value>
+                <value>UA020004, 商户员工, SU000004, user, MXWR, VehicleServiceCompanyEmployee, VSCE000004</value>
+                <value>UA020005, 商户员工, SU000005, user, MXWR, VehicleServiceCompanyEmployee, VSCE000005</value>
+                <value>UA020006, 商户员工, SU000006, user, MXWR, VehicleServiceCompanyEmployee, VSCE000006</value>
             </list>
         </property>
     </bean>
@@ -256,6 +307,7 @@
             <list>
                 <value>FIPNP000001, 川A, VSC000001</value>
                 <value>FIPNP000002, 川A, VSC000002</value>
+                <value>FIPNP000003, 川A, VSC000003</value>
             </list>
         </property>
     </bean>
@@ -266,6 +318,7 @@
             <list>
                 <value>VIPNP000001, 川A, VSC000001</value>
                 <value>VIPNP000002, 川A, VSC000002</value>
+                <value>VIPNP000003, 川A, VSC000003</value>
             </list>
         </property>
     </bean>

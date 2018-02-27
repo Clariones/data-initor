@@ -49,8 +49,10 @@
                 
                 <!-- 测试用数据 -->
                 <ref bean="test_merchant_initor"/>
+                <ref bean="test_merchant_initor_no_movement"/>
                 <ref bean="test_merchant_scope_initor" />
                 <ref bean="test_merchant_employee_initor"/>
+                <ref bean="test_user_app_initor"/>
                 <ref bean="test_company_file_platenumber_initor"/>
                 <ref bean="test_company_vehicle_platenumber_initor"/>
                 <ref bean="test_product_price_initor"/>

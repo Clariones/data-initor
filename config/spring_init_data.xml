@@ -165,6 +165,19 @@
             </list>
         </property>
     </bean>
+    <bean id="test_inspection_station_initor" parent="base_all_string_initor" class="lab.clariones.data_initialization.SimpleDataTypeInferInitOperator">
+        <property name="sql"
+            value="insert into inspection_station_data (id, name, operating_status, address_city, 
+                address_detail, longitude, latitude, contact_name, 
+                contact_mobile, metrology_accreditation_image, version) 
+                values(?,?,?,?, ?,?,?,?, ?,NULL,1)" />
+        <property name="dataList">
+            <list>
+                <value><![CDATA[IS000001, 成都市公安局机动车安全检测中心（犀浦）, 正常, C000001,
+                四川省成都市郫县犀浦镇国宁村三组,104.250544,30.552470, 刘师傅,87850000]]></value>
+            </list>
+        </property>
+    </bean>
     <bean id="test_merchant_initor_no_movement" parent="base_all_string_initor" class="lab.clariones.data_initialization.SimpleDataTypeInferInitOperator">
         <property name="cleanAllExistedDataInTable" value="false"/>
         <property name="sql"
@@ -258,7 +271,7 @@
      <bean id="test_merchant_employee_initor" parent="base_all_string_initor">
         <property name="sql"
             value="insert into vehicle_service_company_employee_data (id,employee_name,profile_image,
-            gender,
+            company_name, gender,
             available_state,
             innocent_evidence_image,
             identity_card_number,
@@ -266,17 +279,17 @@
             available_move_car,
             available_inspection_car,
             available_repair_car,
-            mobile_number,
+            mobile_number,inspection_station,
             version) 
-            values(?,?,?,?,?,?,?,?,true,true,true,?,1)" />
+            values(?,?,?,?,?,?,?,?,?,?,true,true,true,?,1)" />
         <property name="dataList">
             <list>
-                <value>VSCE000001, 张师傅, zhaopian.jpg, 女, 正常, 证明.jpg, 142722198501234456, VSC000001, 13800000001</value>
-                <value>VSCE000002, 王师傅, zhaopian.jpg, 男, 正常, 证明.jpg, 142722198309154456, VSC000001, 13800000002</value>
-                <value>VSCE000003, 赵师傅, zhaopian.jpg, 女, 正常, 证明.jpg, 142722199312084456, VSC000002, 13800000003</value>
-                <value>VSCE000004, 李师傅, zhaopian.jpg, 男, 正常, 证明.jpg, 142722198608184456, VSC000002, 13800000004</value>
-                <value>VSCE000005, 陈师傅, zhaopian.jpg, 男, 正常, 证明.jpg, 142722198608284456, VSC000003, 13800000005</value>
-                <value>VSCE000006, 楚师傅, zhaopian.jpg, 女, 正常, 证明.jpg, 142722198622284456, VSC000004, 13800000006</value>
+                <value>VSCE000001, 张师傅, zhaopian.jpg, 洗车人家, 女, 正常, 证明.jpg, 142722198501234456, VSC000001, 13800000001, NULL</value>
+                <value>VSCE000002, 王师傅, zhaopian.jpg, 洗车人家, 男, 正常, 证明.jpg, 142722198309154456, VSC000001, 13800000002, NULL</value>
+                <value>VSCE000003, 赵师傅, zhaopian.jpg, 好易修汽车快修服务(天府店), 女, 正常, 证明.jpg, 142722199312084456, VSC000002, 13800000003, NULL</value>
+                <value>VSCE000004, 李师傅, zhaopian.jpg, 好易修汽车快修服务(天府店), 男, 正常, 证明.jpg, 142722198608184456, VSC000002, 13800000004, NULL</value>
+                <value>VSCE000005, 陈师傅, zhaopian.jpg, 中和汽修场, 男, 正常, 证明.jpg, 142722198608284456, VSC000003, 13800000005, NULL</value>
+                <value>VSCE000006, 楚师傅, zhaopian.jpg, 大源车辆代审服务公司, 女, 正常, 证明.jpg, 142722198622284456, VSC000004, 13800000006, IS000001</value>
             </list>
         </property>
     </bean>
